@@ -1,309 +1,175 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Kyaw Soe Ye</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kyaw Soe Ye's CV</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/lax.js@1.2.3/lib/lax.min.js"></script>
-    <style>
-        /* General Body Style */
-        body {
-            background: linear-gradient(135deg, #4e54c8, #000);
-            font-family: 'Arial', sans-serif;
-            color: #333;
-/*            padding: 20px;*/
-            box-sizing: content-box;
-        }
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Initialize EmailJS
+    emailjs.init("S7qZp4F1eZR9WUNjh");
 
-        /* Container and Box Styling */
-        .container {
-            margin-top: 50px;
-            background-color: black;
-            border-radius: 12px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-        }
+    // Handle form submission
+    document.querySelector("form").addEventListener("submit", function (e) {
+      e.preventDefault();
 
-        /* CV Header */
-        .cv-header {
-            text-align: center;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #4e54c8, #000);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-        }
+      // Collect form data
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
 
-        .cv-header h1 {
-            font-size: 2.5rem;
-            margin: 0;
-        }
+      // Send email using EmailJS
+      emailjs.send("service_azba8xr", "template_lb5d2em", {
+        name: name,
+        email: email,
+        message: message,
+      })
+        .then(function (response) {
+          alert("Message sent successfully!");
+        })
+        .catch(function (error) {
+          alert("Failed to send message. Please try again later.");
+          console.error("EmailJS Error:", error);
+        });
+    });
+  });
+</script>
 
-        .cv-header p {
-            font-size: 1.1rem;
-        }
+	    
+	</head>
+	<body class="is-preload">
 
-        /* Section Titles */
-        .section-title {
-            font-size: 1.8rem;
-            color: #007bff;
-            margin-top: 30px;
-            margin-bottom: 20px;
-            border-bottom: 3px solid #007bff;
-            padding-bottom: 5px;
-        }
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
 
-        /* Content List Style */
-        .list-group-item {
-            border: none;
-            padding: 15px;
-/*            background-color: #e3f2fd;*/
-background: linear-gradient(135deg, #4e54c8, #000);
-            margin-bottom: 10px;
-            border-radius: 8px;
-            color: white;
-        }
+				<!-- Wrapper -->
+					<div id="wrapper">
 
-        .list-group-item:hover {
-            background-color: #bbdefb;
-        }
+						<!-- Panel (Banner) -->
+							<section class="panel banner right">
+								<div class="content color0 span-3-75">
+									<h1 class="major">Kyaw Soe Ye</h1>
+									<p>I am a skilled and motivated Full Stack Developer eager to contribute to dynamic teams. Explore my profile and projects to learn more about my expertise in application development, cloud platforms, and modern frameworks.</p>
+									<ul class="actions">
+										<li><a href="#contact" class="button primary color1 circle icon solid fa-angle-right">Contact Me</a></li>
+									</ul>
+								</div>
+								<div class="image filtered span-1-75" data-position="25% 25%">
+									<img src="images/pic01.jpg" alt="Profile Picture" />
+								</div>
+							</section>
 
-        .job-title {
-            font-weight: bold;
-        }
+						<!-- Panel (Spotlight) -->
+							<section class="panel spotlight medium right" id="first">
+								<div class="content span-7">
+									<h2 class="major">Professional Highlights</h2>
+									<ul>
+										<li>Design, develop, and maintain both frontend and backend components of web applications.</li>
+										<li>Create responsive and interactive user interfaces using modern frontend frameworks (React JS, Vue JS, etc.).</li>
+										<li>Implement and maintain backend services, APIs, and databases using Node.js, Nest JS, Python (Zope, Boto3), PostgreSQL, MySQL, and MongoDB.</li>
+										<li>Collaborate with DevOps engineers to deploy and manage applications using AWS, Docker, Ansible, Dagger, and Nginx.</li>
+										<li>Optimize application performance and ensure scalability and reliability using monitoring tools like Prometheus and Grafana.</li>
+										<li>Leverage AWS services (S3, EC2, VPC, Route 53, CloudFront) to build cloud-based solutions.</li>
+										<li>Ensure secure data handling and storage using tools like LetsEncrypt and PostgREST.</li>
+										<li>Work with Webpack for asset bundling and deployment.</li>
+									</ul>
+								</div>
+								<div class="image filtered tinted" data-position="top left">
+									<img src="images/pic02.jpg" alt="" />
+								</div>
+							</section>
 
-        .job-company a {
-            text-decoration: none;
-            color: #007bff;
-        }
 
-        .job-company a:hover {
-            text-decoration: underline;
-        }
 
-        /* Skills Styling */
-        .skill-tag {
-            display: inline-block;
-/*            background-color: #007bff;*/
-            background: linear-gradient(135deg, #4e54c8, #000);
-            color: white;
-            border-radius: 5px;
-            padding: 8px 15px;
-            margin: 5px;
-            font-size: 1rem;
-        }
+						<!-- Panel (Spotlight) -->
+							<section class="panel spotlight medium right" id="first">
+								<div class="content span-7">
+									<h2 class="major">Skills</h2>
+									<ul>
+										<li>Programming Languages: HTML, CSS, JavaScript, Java, Python.</li>
+										<li>Frontend Frameworks: React JS, Redux, Vue JS, Mithril JS, Electron JS.</li>
+										<li>Backend Technologies: Node.js, Nest JS, Python (Zope, Boto3), PostgreSQL, MySQL, MongoDB, GunDB.</li>
+										<li>DevOps & Tools: AWS, Docker, Ansible, Dagger, Nginx, Prometheus, Grafana, LetsEncrypt.</li>
+										<li>Cloud Platforms: Proficiency in AWS (S3, EC2, VPC, Route 53, CloudFront).</li>
+									</ul>
+								</div>
+								<div class="image filtered tinted" data-position="top left">
+									<img src="images/pic03.jpg" alt="" />
+								</div>
+							</section>
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 20px;
-            background: linear-gradient(135deg, #4e54c8, #000);
-            color: white;
-            border-radius: 10px;
-        }
+							<section class="panel spotlight medium right" id="first">
+								<div class="content span-7">
+									<h2 class="major">Work Experience</h2>
+									<ul>
+										<li><strong>Full Stack Developer</strong> - Districtos.inc (Dec 2022 – Present) <br> Location: Salt Lake City, UT, USA <br> Responsibilities: Design and implement full-stack applications using React JS, Redux, Node.js, and AWS services.</li>
+										<li><strong>Full Stack Developer</strong> - SGP Foods Pte. Ltd (Sep 2021 – Nov 2022) <br> Enhanced user experience and system performance using modern JavaScript frameworks.</li>
+										<li><strong>Junior Developer</strong> - OC Tech Solution Pte Ltd (Feb 2021 – Aug 2021) <br> Built reusable code modules to optimize workflows.</li>
+										<li><strong>Junior Developer</strong> - IrraHub Pte Ltd (Nov 2019 – Jan 2021) <br> Collaborated on web application development and API integrations.</li>
+										<li><strong>Intern</strong> - IrraHub Pte Ltd (May 2019 – Aug 2019) <br> Supported ongoing projects by debugging and optimizing performance.</li>
+									</ul>
+								</div>
+								<div class="image filtered tinted" data-position="top left">
+									<img src="images/gallery/thumbs/03.jpg" alt="" />
+								</div>
+							</section>
 
-        /* Lax.js Animations for Elements */
-        .lax {
-            transition: all 0.3s ease;
-        }
-        /* General Box Styling */
-        .box-section {
-            background: linear-gradient(135deg, #4e54c8, #000);
-            color: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+							
 
-        /* Hover effect for the box */
-        .box-section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
-        }
 
-        /* Section Title Styling */
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
-            padding-bottom: 10px;
-        }
-
-        /* Section Content Styling */
-        .section-content {
-            font-size: 1.1rem;
-            line-height: 1.6;
-        }
-    </style>
-</head>
-
-<body>
-
-    <div class="container">
-        <!-- Header Section -->
-        <div class="cv-header lax" data-lax-translate-x="0 0, vh 100">
-            <h1>Kyaw Soe Ye</h1>
-            <p><a href="mailto:dev.kyawsoeye@gmail.com?subject=Your%20Subject&body=Hello%20Kyaw%20Soe%20Ye," target="_blank">dev.kyawsoeye@gmail.com</a></p>
-            <p>2009, Bearing 4 Aly, Samrong Nuea, Mueang Samut Prakan District, Samut Prakan 10270, Thailand</p>
+						<!-- Panel -->
+							<section class="panel color4-alt" id="contact">
+  <div class="intro color4">
+    <h2 class="major">Contact</h2>
+    <p>Feel free to reach out to me for collaboration, job opportunities, or any inquiries related to my expertise and projects.</p>
+  </div>
+  <div class="inner columns divided">
+    <div class="span-3-25">
+      <form method="post" action="#">
+        <div class="fields">
+          <div class="field half">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" />
+          </div>
+          <div class="field half">
+            <label for="email">Email</label>
+            <input type="email" name="email" id="email" />
+          </div>
+          <div class="field">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" rows="4"></textarea>
+          </div>
         </div>
-
-        <!-- Career Objective Section -->
-        <!-- <div class="box-section lax" data-lax-preset="fadeIn zoomIn"> -->
-
-            <div class="section-title lax" data-lax-preset="fadeIn zoomIn">CAREER OBJECTIVE</div>
-            <div class="box-section lax" data-lax-preset="fadeIn zoomIn">
-            <p class="section-content">
-                An able, keen, skilled, and trustworthy individual seeking a computer technician position. Bringing strong
-                computer skills, and personal attributes including devotion, meeting goals, inventiveness, and the aptitude
-                to follow through.
-            </p>
-        </div>
-
-        <!-- Academic Details Section -->
-        <!-- <div class="box-section lax" data-lax-preset="fadeIn zoomIn"> -->
-            <div class="section-title lax" data-lax-preset="fadeIn zoomIn">ACADEMIC DETAILS</div>
-            <div class="box-section lax" data-lax-preset="fadeIn zoomIn">
-            <p class="section-content">
-                B.C.Sc Graduated from University of Computer Studies Yangon
-            </p>
-        </div>
-
-        <!-- Work Experience Section -->
-        <div class="section-title lax" data-lax-preset="fadeIn zoomIn">WORK EXPERIENCE</div>
-        <ul class="list-group">
-            <li class="list-group-item lax" data-lax-preset="driftLeft-50 fadeIn">
-                <span class="job-title">Junior Developer</span> at <span class="job-company"><a href="https://www.irrahub.com" target="_blank">IrraHub Pte Ltd</a></span> (Nov 2019 - Jan 2021)
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftLeft-50 fadeIn">
-                <span class="job-title">Junior Developer</span> at <span class="job-company"><a href="https://ocdigitalnetwork.com" target="_blank">OC Tech Solution Pte Ltd</a></span> (Feb 2021 - Aug 2021)
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftLeft-50 fadeIn">
-                <span class="job-title">Full Stack Developer</span> at <span class="job-company"><a href="https://sgpfoods.com" target="_blank">Sgp Foods Pte. Ltd</a></span> (Sept 2021 - Nov 2022)
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftLeft-50 fadeIn">
-                <span class="job-title">Full Stack Developer</span> at <span class="job-company"><a href="#" target="_blank">Districtos.inc</a></span> (Dec 2022 - Current)
-            </li>
+        <ul class="actions">
+          <li><input type="submit" value="Send Message" class="button primary" /></li>
         </ul>
-
-        <!-- Project Details Section -->
-        <div class="section-title lax" data-lax-preset="fadeIn zoomIn">PROJECT DETAILS</div>
-        <ul class="list-group">
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">Car Management System</span> - This system is a web project with used React JS and Redux and Node Js(Kenx)
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">Knapshot</span> - This system is a web project with used React JS and Redux and Node JS(Express) 
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">TF Energy Services</span> - This system is a web project with used React JS and Redux and Nest JS and Swagger API
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">Enrollment</span> - This system is a web project for manage school data with used Mithril JS,webpack,gundb.
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">Edops</span> - This system is for backend process of enrollment.For manage schools data with using python and zope.site and so many things Python library and Postgresql
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">Beacon</span> - This is for set up of AWS Ec2 with VPC and subnet and gateway and EIP and route 53 and Cloudfront and then certificate and S3 with using Python(Boto3,Cloudbridge) and Nodejs(AWS-SDK) with Dagger
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">Wireguard</span> - Set Up wireguard from AWS with route 53 with used Python and Ansible
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">VMS</span> - Set Up VM(Virtual Machine) with used ansible and then run this vm configure with using ansible
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">Email-Server</span> - This is for set up of email server with my domain in route 53 and then used also Docker process and Ansible
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">SFTP</span> - This is for upload data with using sftp and then point route to AWS with used Ansible and Python  
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">Data-Processor</span> - This is for Enrollment app with used python and nodejs
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-            <li class="list-group-item lax" data-lax-preset="driftRight-50 fadeIn">
-                <span class="project-title">VM-Dashboard</span> - This is for show details of vm specification and status of services and logs with used Grafana and prometheus and node exporter and loki and promtail.
-                <br>
-                <span class="project-duration">Role: Developer</span>
-            </li>
-        </ul>
-
-        <!-- Skills Section -->
-        <div class="section-title lax" data-lax-preset="fadeIn zoomIn">SKILLS</div>
-        <div class="lax" data-lax-preset="zoomIn fadeIn">
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Typescript</span>
-            <span class="skill-tag">React Js</span>
-            <span class="skill-tag">Redux</span>
-            <span class="skill-tag">Node Js</span>
-            <span class="skill-tag">Electron JS</span>
-            <span class="skill-tag">Mithril JS</span>
-            <span class="skill-tag">Vue JS</span>
-            <span class="skill-tag">Nest JS</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">AWS</span>
-            <span class="skill-tag">Ansible</span>  
-            <span class="skill-tag">Docker</span>           
-            <span class="skill-tag">Nginx</span>
-            <span class="skill-tag">Virtual Machine</span>
-            <span class="skill-tag">Dagger</span>
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">MongoDB</span>
-            <span class="skill-tag">Postgresql</span>
-            <span class="skill-tag">Postgrest</span>
-            <span class="skill-tag">GunDB</span>
-
-        </div>
-
-        <!-- Footer Section -->
-        <div class="footer lax" data-lax-preset="driftUp-100 fadeIn">
-            <p>I hereby declare that the above-mentioned information is correct up to my knowledge.</p>
-        </div>
+      </form>
     </div>
+    <div class="span-1-5">
+      <ul class="contact-icons color1">
+        <li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/kyawsoe/">LinkedIn</a></li>
+        <li class="icon brands fa-github"><a href="https://github.com/kyawsoe007">GitHub</a></li>
+        <li class="icon fas fa-envelope"><a href="mailto:kyawsoeye11@gmail.com">Email</a></li>
+        <li class="icon solid fa-map-marker-alt">Samut Prakan, Thailand</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <script>
-        window.onload = function () {
-            lax.setup(); // initialize Lax.js
+					</div>
 
-            // Add a scroll event listener to update lax
-            document.addEventListener('scroll', function () {
-                lax.update(window.scrollY);
-            }, false);
-        };
-    </script>
+			</div>
 
-</body>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/main.js"></script>
 
+	</body>
 </html>
