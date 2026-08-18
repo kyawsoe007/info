@@ -1,276 +1,498 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>Kyaw Soe Ye</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kyaw Soe Ye — Full Stack Developer</title>
+<meta name="description" content="Kyaw Soe Ye — Full Stack Developer specializing in React, Node.js, and cloud infrastructure." />
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0e14;
+    --bg-alt:#11141c;
+    --surface:#151a24;
+    --surface-hi:#1b2230;
+    --border:#242b3a;
+    --text:#e6e9f0;
+    --text-dim:#9aa4b8;
+    --text-faint:#5c6579;
+    --accent:#5eead4;
+    --accent-2:#818cf8;
+    --accent-warm:#fbbf24;
+    --radius:12px;
+    --maxw:1080px;
+    --mono: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    background-image:
+      radial-gradient(circle at 15% 0%, rgba(94,234,212,0.07), transparent 40%),
+      radial-gradient(circle at 85% 15%, rgba(129,140,248,0.08), transparent 40%);
+    background-attachment:fixed;
+  }
+  a{color:inherit; text-decoration:none;}
+  ::selection{background:var(--accent); color:#04120f;}
 
-		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+
+  /* NAV */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(11,14,20,0.75);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:16px 28px; max-width:var(--maxw); margin:0 auto;}
+  .brand{font-family:var(--mono); font-weight:700; font-size:1.05rem; color:var(--text); display:flex; align-items:center; gap:8px;}
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent);}
+  nav.links{display:flex; gap:28px; font-size:0.92rem; color:var(--text-dim);}
+  nav.links a{transition:color .2s;}
+  nav.links a:hover{color:var(--accent);}
+  .nav-cta{
+    font-family:var(--mono); font-size:0.85rem; padding:8px 16px; border:1px solid var(--accent); color:var(--accent);
+    border-radius:8px; transition:all .2s;
+  }
+  .nav-cta:hover{background:var(--accent); color:#04120f;}
+  .menu-btn{display:none; background:none; border:1px solid var(--border); color:var(--text); border-radius:8px; padding:8px 10px; font-size:1rem;}
+
+  /* HERO */
+  .hero{padding:96px 0 72px; position:relative;}
+  .eyebrow{
+    font-family:var(--mono); color:var(--accent); font-size:0.9rem; letter-spacing:0.05em;
+    display:flex; align-items:center; gap:10px; margin-bottom:20px;
+  }
+  .eyebrow::before{content:'>'; color:var(--accent-2);}
+  h1{
+    font-size:clamp(2.2rem, 6vw, 3.6rem); font-weight:800; line-height:1.1; letter-spacing:-0.02em;
+    margin-bottom:18px;
+  }
+  h1 .grad{
+    background:linear-gradient(90deg, var(--accent), var(--accent-2));
+    -webkit-background-clip:text; background-clip:text; color:transparent;
+  }
+  .hero p.lead{color:var(--text-dim); font-size:1.15rem; max-width:640px; margin-bottom:32px;}
+  .hero-meta{display:flex; flex-wrap:wrap; gap:18px; color:var(--text-faint); font-size:0.9rem; margin-bottom:36px; font-family:var(--mono);}
+  .hero-meta span{display:flex; align-items:center; gap:6px;}
+  .btn-row{display:flex; flex-wrap:wrap; gap:14px;}
+  .btn{
+    padding:13px 24px; border-radius:9px; font-weight:600; font-size:0.95rem; transition:all .2s; display:inline-flex; align-items:center; gap:8px;
+  }
+  .btn-primary{background:var(--accent); color:#04120f;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 8px 24px rgba(94,234,212,0.25);}
+  .btn-outline{border:1px solid var(--border); color:var(--text);}
+  .btn-outline:hover{border-color:var(--accent); color:var(--accent);}
+
+  /* SECTION generic */
+  section{padding:64px 0; border-top:1px solid var(--border);}
+  .section-head{margin-bottom:40px;}
+  .section-tag{font-family:var(--mono); color:var(--accent-2); font-size:0.85rem; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:8px;}
+  .section-title{font-size:1.9rem; font-weight:800; letter-spacing:-0.01em;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:1.3fr 1fr; gap:48px; align-items:start;}
+  .about-text p{color:var(--text-dim); margin-bottom:16px; font-size:1.02rem;}
+  .about-list{list-style:none; margin-top:20px; display:flex; flex-direction:column; gap:10px;}
+  .about-list li{color:var(--text-dim); font-size:0.95rem; padding-left:22px; position:relative;}
+  .about-list li::before{content:'▹'; position:absolute; left:0; color:var(--accent);}
+  .stat-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:24px; margin-bottom:16px;}
+  .stat-card .num{font-family:var(--mono); font-size:2.1rem; font-weight:700; color:var(--accent);}
+  .stat-card .label{color:var(--text-faint); font-size:0.88rem; margin-top:4px;}
+
+  /* SKILLS */
+  .skills-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(230px,1fr)); gap:20px;}
+  .skill-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px;}
+  .skill-card h3{font-size:1rem; margin-bottom:14px; color:var(--accent); font-family:var(--mono);}
+  .chip-row{display:flex; flex-wrap:wrap; gap:8px;}
+  .chip{
+    background:var(--surface-hi); border:1px solid var(--border); color:var(--text-dim); font-size:0.82rem;
+    padding:5px 11px; border-radius:6px; font-family:var(--mono);
+  }
+
+  /* EXPERIENCE */
+  .timeline{position:relative; padding-left:28px; border-left:1px solid var(--border);}
+  .tl-item{position:relative; padding-bottom:44px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-dot{position:absolute; left:-33px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--bg); border:2px solid var(--accent);}
+  .tl-item.current .tl-dot{background:var(--accent); box-shadow:0 0 10px var(--accent);}
+  .tl-head{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:baseline; margin-bottom:6px;}
+  .tl-role{font-size:1.15rem; font-weight:700;}
+  .tl-period{font-family:var(--mono); font-size:0.82rem; color:var(--text-faint); white-space:nowrap;}
+  .tl-org{color:var(--accent-2); font-weight:600; font-size:0.95rem; margin-bottom:2px;}
+  .tl-loc{color:var(--text-faint); font-size:0.82rem; margin-bottom:12px;}
+  .tl-bullets{list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .tl-bullets li{color:var(--text-dim); font-size:0.93rem; padding-left:18px; position:relative;}
+  .tl-bullets li::before{content:'—'; position:absolute; left:0; color:var(--text-faint);}
+  .badge-current{
+    font-family:var(--mono); font-size:0.7rem; background:rgba(94,234,212,0.12); color:var(--accent);
+    padding:2px 8px; border-radius:99px; margin-left:8px; vertical-align:middle; border:1px solid rgba(94,234,212,0.3);
+  }
+
+  /* PROJECTS */
+  .projects-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(300px,1fr)); gap:22px;}
+  .project-card{
+    background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px;
+    transition:transform .2s, border-color .2s;
+  }
+  .project-card:hover{transform:translateY(-4px); border-color:var(--accent);}
+  .project-card h3{font-size:1.08rem; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;}
+  .project-card p{color:var(--text-dim); font-size:0.9rem; margin-bottom:14px; min-height:60px;}
+  .project-link{font-family:var(--mono); font-size:0.8rem; color:var(--accent-warm);}
+  .project-link:hover{text-decoration:underline;}
+
+  /* EDUCATION / INTERESTS */
+  .two-col{display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .info-card{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:26px;}
+  .info-card h3{font-family:var(--mono); color:var(--accent); font-size:0.95rem; margin-bottom:14px;}
+  .info-card p, .info-card li{color:var(--text-dim); font-size:0.93rem;}
+  .info-card ul{list-style:none; display:flex; flex-direction:column; gap:8px;}
+  .info-card li{padding-left:18px; position:relative;}
+  .info-card li::before{content:'▹'; position:absolute; left:0; color:var(--accent-2);}
+
+  /* CONTACT / FOOTER */
+  .contact{text-align:center; padding:90px 0;}
+  .contact .section-tag{justify-content:center; display:flex;}
+  .contact h2{font-size:clamp(1.8rem,5vw,2.6rem); font-weight:800; margin:14px 0 18px;}
+  .contact p{color:var(--text-dim); max-width:480px; margin:0 auto 32px;}
+  footer{border-top:1px solid var(--border); padding:28px 0; text-align:center; color:var(--text-faint); font-size:0.85rem; font-family:var(--mono);}
+
+  @media (max-width:800px){
+    .about-grid, .two-col{grid-template-columns:1fr;}
+    nav.links{display:none;}
+    .menu-btn{display:inline-block;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span>Kyaw Soe Ye</div>
+    <nav class="links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="mailto:kyawsoeye11@gmail.com">Say hi</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero wrap">
+    <div class="eyebrow">available for full-time roles</div>
+    <h1>Hi, I'm Kyaw Soe Ye —<br>I build <span class="grad">full‑stack web &amp; cloud</span> solutions.</h1>
+    <p class="lead">Full Stack Developer with 6+ years of experience shipping end-to-end applications with React, Node.js, and Python — and the cloud infrastructure (AWS, Alibaba Cloud, Docker) that keeps them fast, secure, and online.</p>
+    <div class="hero-meta">
+      <span>📍 Samut Prakan, Thailand</span>
+      <span>✉️ kyawsoeye11@gmail.com</span>
+      <span>🎓 B.C.Sc, University of Computer Studies, Yangon</span>
+    </div>
+    <div class="btn-row">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn btn-outline" href="#experience">See Experience</a>
+      <a class="btn btn-outline" href="mailto:kyawsoeye11@gmail.com">Contact Me</a>
+    </div>
+  </section>
+
+  <section id="about" class="wrap">
+    <div class="section-head">
+      <div class="section-tag">01 · About</div>
+      <div class="section-title">A bit about my work</div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>I'm a skilled and motivated Full Stack Developer eager to contribute to dynamic teams. I bring expertise in end-to-end application development, leveraging modern frameworks, backend technologies, and cloud platforms. I'm passionate about collaborating with cross-functional teams to deliver robust, scalable, and user-friendly solutions.</p>
+        <ul class="about-list">
+          <li>Design, develop, and maintain both frontend and backend components of web applications.</li>
+          <li>Build responsive, interactive UIs with modern frontend frameworks (React JS, Vue JS, and more).</li>
+          <li>Implement backend services, APIs, and databases with Node.js, Nest JS, Python (Zope, Boto3), PostgreSQL, MySQL, and MongoDB.</li>
+          <li>Deploy and manage applications with AWS, Docker, Ansible, Dagger, and Nginx.</li>
+          <li>Monitor performance and reliability using Prometheus and Grafana.</li>
+          <li>Secure data handling and storage with LetsEncrypt and PostgREST.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="stat-card"><div class="num">6+</div><div class="label">Years of professional experience</div></div>
+        <div class="stat-card"><div class="num">5</div><div class="label">Companies across Myanmar, USA &amp; Thailand</div></div>
+        <div class="stat-card"><div class="num">15+</div><div class="label">Projects &amp; production platforms shipped</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="wrap">
+    <div class="section-head">
+      <div class="section-tag">02 · Skills</div>
+      <div class="section-title">Technologies I work with</div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <div class="chip-row">
+          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Java</span><span class="chip">Python</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Frontend</h3>
+        <div class="chip-row">
+          <span class="chip">React JS</span><span class="chip">Redux</span><span class="chip">Vue JS</span><span class="chip">Mithril JS</span><span class="chip">Electron JS</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Backend</h3>
+        <div class="chip-row">
+          <span class="chip">Node.js</span><span class="chip">Nest JS</span><span class="chip">Python (Zope, Boto3)</span><span class="chip">PostgreSQL</span><span class="chip">MySQL</span><span class="chip">MongoDB</span><span class="chip">GunDB</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>DevOps &amp; Tools</h3>
+        <div class="chip-row">
+          <span class="chip">AWS</span><span class="chip">Alibaba Cloud</span><span class="chip">Docker</span><span class="chip">Ansible</span><span class="chip">Dagger</span><span class="chip">Apache</span><span class="chip">Nginx</span><span class="chip">Prometheus</span><span class="chip">Grafana</span><span class="chip">LetsEncrypt</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <h3>Cloud Platforms</h3>
+        <div class="chip-row">
+          <span class="chip">AWS S3</span><span class="chip">EC2</span><span class="chip">VPC</span><span class="chip">Route 53</span><span class="chip">CloudFront</span><span class="chip">Alibaba ECS</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="wrap">
+    <div class="section-head">
+      <div class="section-tag">03 · Experience</div>
+      <div class="section-title">Where I've worked</div>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item current">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <div class="tl-role">Full Stack Developer<span class="badge-current">Current</span></div>
+          <div class="tl-period">Apr 2025 — Present</div>
+        </div>
+        <div class="tl-org">UNFTP.ngo</div>
+        <div class="tl-loc">Based in Thailand</div>
+        <ul class="tl-bullets">
+          <li>Developed and maintained a Node.js/Express and React (MUI) admin platform for managing organisations, groups, and contacts, including OTP-based authentication with JWT and a passwordless magic-login flow.</li>
+          <li>Maintained and extended a multi-app PHP platform (public site, custom admin panel, Yii2-based group management system) alongside a React Native mobile app for event management and push notifications.</li>
+          <li>Provisioned and configured Alibaba Cloud ECS instances to host web applications, APIs, and databases.</li>
+          <li>Managed domain DNS via Namecheap and automated wildcard SSL issuance/renewal (acme.sh + Let's Encrypt) across multiple subdomains.</li>
+          <li>Configured Apache virtual hosts, reverse proxies, and phpMyAdmin instances for multi-domain deployments.</li>
+          <li>Set up and administered MySQL databases supporting the organisation admin platform.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <div class="tl-role">Full Stack Developer</div>
+          <div class="tl-period">Dec 2022 — Mar 2025</div>
+        </div>
+        <div class="tl-org">Districtos.inc</div>
+        <div class="tl-loc">Salt Lake City, UT, USA</div>
+        <ul class="tl-bullets">
+          <li>Designed and implemented full-stack applications using React JS, Redux, Node.js, and AWS services.</li>
+          <li>Led the development of cloud-based and on-premises solutions.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <div class="tl-role">Full Stack Developer</div>
+          <div class="tl-period">Sep 2021 — Nov 2022</div>
+        </div>
+        <div class="tl-org">SGP Foods Pte. Ltd</div>
+        <div class="tl-loc">sgpfoods.com</div>
+        <ul class="tl-bullets">
+          <li>Developed web applications for e-commerce and inventory management.</li>
+          <li>Enhanced user experience and system performance using modern JavaScript frameworks.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <div class="tl-role">Junior Developer</div>
+          <div class="tl-period">Feb 2021 — Aug 2021</div>
+        </div>
+        <div class="tl-org">OC Tech Solution Pte Ltd</div>
+        <div class="tl-loc">ocdigitalnetwork.com</div>
+        <ul class="tl-bullets">
+          <li>Assisted in the development of client-based solutions for digital marketing platforms.</li>
+          <li>Built reusable code modules to optimize application workflows.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <div class="tl-role">Junior Developer</div>
+          <div class="tl-period">Nov 2019 — Jan 2021</div>
+        </div>
+        <div class="tl-org">IrraHub Pte Ltd</div>
+        <div class="tl-loc">irrahub.com</div>
+        <ul class="tl-bullets">
+          <li>Collaborated in team projects for web application development and API integrations.</li>
+          <li>Gained hands-on experience with Node.js, React, and PostgreSQL.</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-head">
+          <div class="tl-role">Intern</div>
+          <div class="tl-period">May 2019 — Aug 2019</div>
+        </div>
+        <div class="tl-org">IrraHub Pte Ltd</div>
+        <ul class="tl-bullets">
+          <li>Supported ongoing projects by debugging code and optimizing performance.</li>
+          <li>Built foundational knowledge in cloud integration and database management.</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="projects" class="wrap">
+    <div class="section-head">
+      <div class="section-tag">04 · Projects</div>
+      <div class="section-title">Selected work</div>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <h3>UNFTP Organisation Admin Platform</h3>
+        <p>Admin interface for managing organisations, groups, and contacts, built with Node.js/Express and React (MUI), featuring OTP-based auth, JWT sessions, and a passwordless magic-login flow.</p>
+        <span class="project-link">Node.js · Express · React · MUI</span>
+      </div>
+
+      <div class="project-card">
+        <h3>WikiWaste Platform</h3>
+        <p>Multi-app PHP platform (public site, custom admin panel, Yii2 group management) with an AI-based image classification pipeline that auto-detects and classifies waste items from photos.</p>
+        <span class="project-link">PHP · Yii2 · AI image classification</span>
+      </div>
+
+      <div class="project-card">
+        <h3>CleanUp Harriers Mobile App</h3>
+        <p>React Native app for organizing litter cleanup events — calendar-based events, Mapbox navigation, barcode/camera item logging, and Firebase push notifications.</p>
+        <span class="project-link">React Native · Mapbox · Firebase</span>
+      </div>
+
+      <div class="project-card">
+        <h3>Cloud &amp; Server Infrastructure Setup</h3>
+        <p>Provisioned Alibaba Cloud ECS instances, configured Apache virtual hosts and reverse proxies, automated wildcard SSL via Namecheap DNS + acme.sh, and set up MySQL with phpMyAdmin.</p>
+        <span class="project-link">Alibaba Cloud · Apache · acme.sh</span>
+      </div>
+
+      <div class="project-card">
+        <h3>Car Management System</h3>
+        <p>Web application for managing vehicle data, built with React JS, Redux, and Node.js (Knex).</p>
+        <span class="project-link">React · Redux · Node.js · Knex</span>
+      </div>
+
+      <div class="project-card">
+        <h3>Knapshot</h3>
+        <p>A web-based system built with React JS, Redux, and Node.js (Express).</p>
+        <span class="project-link">React · Redux · Express</span>
+      </div>
+
+      <div class="project-card">
+        <h3>TF Energy Services</h3>
+        <p>Energy services platform leveraging React JS, Redux, Nest JS, and a Swagger-documented API.</p>
+        <span class="project-link">React · Nest JS · Swagger</span>
+      </div>
+
+      <div class="project-card">
+        <h3>Enrollment &amp; Edops</h3>
+        <p>School data management applications using Mithril JS, Webpack, and GunDB on the frontend, with Python and PostgreSQL on the backend.</p>
+        <span class="project-link">Mithril JS · GunDB · Python · PostgreSQL</span>
+      </div>
+
+      <div class="project-card">
+        <h3>Beacon</h3>
+        <p>AWS infrastructure setup covering EC2, VPC, Route 53, S3, and CloudFront using Python (Boto3, Cloudbridge) and the Node.js AWS SDK.</p>
+        <span class="project-link">AWS · Boto3 · Node.js SDK</span>
+      </div>
+
+      <div class="project-card">
+        <h3>Wireguard &amp; VM Setup</h3>
+        <p>Automated Wireguard VPN setup and VM deployment using Ansible and Python.</p>
+        <span class="project-link">Ansible · Python · Wireguard</span>
+      </div>
+
+      <div class="project-card">
+        <h3>VM Dashboard</h3>
+        <p>A monitoring dashboard built with Grafana, Prometheus, Node Exporter, Loki, and Promtail.</p>
+        <span class="project-link">Grafana · Prometheus · Loki</span>
+      </div>
+
+      <div class="project-card">
+        <h3>Email Server &amp; SFTP Setup</h3>
+        <p>Configured email servers and SFTP for secure data handling using Docker, Ansible, and AWS.</p>
+        <span class="project-link">Docker · Ansible · AWS</span>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <div class="section-tag">05 · More</div>
+      <div class="section-title">Education, interests &amp; focus</div>
+    </div>
+    <div class="two-col">
+      <div class="info-card">
+        <h3>🎓 Education</h3>
+        <p><strong>Bachelor of Computer Science (B.C.Sc)</strong><br>University of Computer Studies, Yangon — Graduated 2019</p>
+        <h3 style="margin-top:22px;">🎯 Field of Interest</h3>
+        <ul>
+          <li>UI/UX Design and Development</li>
+          <li>Full-Stack Application Development</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h3>✨ Strengths &amp; Hobbies</h3>
+        <ul>
+          <li>Strong problem-solving skills and a collaborative mindset.</li>
+          <li>Quick to learn new technologies and adapt to evolving challenges.</li>
+          <li>Exploring new destinations through travel and learning new programming languages.</li>
+          <li>Undertaking innovative tech projects and cultivating a passion for planting and gardening.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact wrap">
+    <div class="section-tag">06 · Contact</div>
+    <h2>Let's build something together.</h2>
+    <p>I'm currently open to new full-stack opportunities. Feel free to reach out — I'll get back to you as soon as I can.</p>
+    <div class="btn-row" style="justify-content:center;">
+      <a class="btn btn-primary" href="mailto:kyawsoeye11@gmail.com">✉️ kyawsoeye11@gmail.com</a>
+      <a class="btn btn-outline" href="https://github.com/kyawsoe007" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© <span id="year"></span> Kyaw Soe Ye — Built with HTML, CSS &amp; a lot of coffee.</div>
+</footer>
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    // Initialize EmailJS
-    emailjs.init("S7qZp4F1eZR9WUNjh");
-
-    // Handle form submission
-    document.querySelector("form").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      // Collect form data
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const message = document.getElementById("message").value;
-
-      // Send email using EmailJS
-      emailjs.send("service_azba8xr", "template_lb5d2em", {
-        name: name,
-        email: email,
-        message: message,
-      })
-        .then(function (response) {
-          alert("Message sent successfully!");
-        })
-        .catch(function (error) {
-          alert("Failed to send message. Please try again later.");
-          console.error("EmailJS Error:", error);
-        });
-    });
-  });
+  document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
-	    
-	</head>
-	<body class="is-preload">
-
-		<!-- Page Wrapper -->
-			<div id="page-wrapper">
-
-				<!-- Wrapper -->
-					<div id="wrapper">
-
-						<!-- Panel (Banner) -->
-							<section class="panel banner">
-								<div class="content color0 span-3-75">
-									<h1 class="major">Kyaw Soe Ye</h1>
-									<p>I am a skilled and motivated Full Stack Developer eager to contribute to dynamic teams. Explore my profile and projects to learn more about my expertise in application development, cloud platforms, and modern frameworks.</p>
-									<ul class="actions">
-										<li><a href="#contact" class="button primary color1 circle icon solid fa-angle-right">Contact Me</a></li>
-									</ul>
-								</div>
-							</section>
-
-							<!-- Academic Qualifications -->
-        <section class="panel spotlight medium right" id="academic">
-          <div class="content span-7">
-            <h2 class="major">Academic Qualifications</h2>
-            <ul>
-                    <li><strong>Bachelor of Computer Science (B.C.Sc)</strong> - <a href="https://ucsy.edu.mm" target="_blank">University of Computer Studies, Yangon</a> (2019)</li>
-
-            </ul>
-          </div>
-          <div class="image filtered tinted" data-position="top left">
-            <img src="images/pic04.jpg" alt="" />
-          </div>
-        </section>
-
-						<!-- Panel (Spotlight) -->
-							<section class="panel spotlight medium" id="first">
-								<div class="content span-7">
-									<h2 class="major">Professional Highlights</h2>
-									<ul>
-										<li>Design, develop, and maintain both frontend and backend components of web applications.</li>
-										<li>Create responsive and interactive user interfaces using modern frontend frameworks (React JS, Vue JS, etc.).</li>
-										<li>Implement and maintain backend services, APIs, and databases using Node.js, Nest JS, Python (Zope, Boto3), PostgreSQL, MySQL, and MongoDB.</li>
-										<li>Collaborate with DevOps engineers to deploy and manage applications using AWS, Docker, Ansible, Dagger, and Nginx.</li>
-										<li>Optimize application performance and ensure scalability and reliability using monitoring tools like Prometheus and Grafana.</li>
-										<li>Leverage AWS services (S3, EC2, VPC, Route 53, CloudFront) to build cloud-based solutions.</li>
-										<li>Ensure secure data handling and storage using tools like LetsEncrypt and PostgREST.</li>
-										<li>Work with Webpack for asset bundling and deployment.</li>
-									</ul>
-								</div>
-								<div class="image filtered tinted" data-position="top left">
-									<img src="images/pic02.jpg" alt="" />
-								</div>
-							</section>
-
-
-
-						<!-- Panel (Spotlight) -->
-							<section class="panel spotlight medium" id="first">
-								<div class="content span-7">
-									<h2 class="major">Skills</h2>
-									<ul>
-										<li>Programming Languages: HTML, CSS, JavaScript, Java, Python.</li>
-										<li>Frontend Frameworks: React JS, Redux, Vue JS, Mithril JS, Electron JS.</li>
-										<li>Backend Technologies: Node.js, Nest JS, Python (Zope, Boto3), PostgreSQL, MySQL, MongoDB, GunDB.</li>
-										<li>DevOps & Tools: AWS, Docker, Ansible, Dagger, Nginx, Prometheus, Grafana, LetsEncrypt.</li>
-										<li>Cloud Platforms: Proficiency in AWS (S3, EC2, VPC, Route 53, CloudFront).</li>
-									</ul>
-								</div>
-								<div class="image filtered tinted" data-position="top left">
-									<img src="images/pic03.jpg" alt="" />
-								</div>
-							</section>
-
-							<section class="panel spotlight medium" id="first">
-								<div class="content span-7">
-									<h2 class="major">Work Experience</h2>
-									<ul>
-										<li><strong>Full Stack Developer</strong> - Districtos.inc (Dec 2022 – Present) <br> Location: Salt Lake City, UT, USA <br> Responsibilities: Design and implement full-stack applications using React JS, Redux, Node.js, and AWS services.</li>
-										<li><strong>Full Stack Developer</strong> - SGP Foods Pte. Ltd (Sep 2021 – Nov 2022) <br> Enhanced user experience and system performance using modern JavaScript frameworks.</li>
-										<li><strong>Junior Developer</strong> - OC Tech Solution Pte Ltd (Feb 2021 – Aug 2021) <br> Built reusable code modules to optimize workflows.</li>
-										<li><strong>Junior Developer</strong> - IrraHub Pte Ltd (Nov 2019 – Jan 2021) <br> Collaborated on web application development and API integrations.</li>
-										<li><strong>Intern</strong> - IrraHub Pte Ltd (May 2019 – Aug 2019) <br> Supported ongoing projects by debugging and optimizing performance.</li>
-									</ul>
-								</div>
-								<div class="image filtered tinted" data-position="top left">
-									<img src="images/gallery/thumbs/03.jpg" alt="" />
-								</div>
-							</section>
-
-			<!-- Full-Stack Development Projects -->
-<section class="panel spotlight medium" id="first">
-  <div class="content span-7">
-    <h2 class="major">Full-Stack Development Projects</h2>
-    <ul>
-      <li>
-        <strong>Car Management System</strong> - Web application for managing vehicle data using React JS, Redux, and Node.js (Knex). <br>
-        <strong>Role:</strong> Developer
-      </li>
-      <li>
-        <strong>Knapshot</strong> - A web-based system built with React JS, Redux, and Node.js (Express). <br>
-        <strong>Role:</strong> Developer
-      </li>
-      <li>
-        <strong>TF Energy Services</strong> - Energy services platform leveraging React JS, Redux, Nest JS, and Swagger API. <br>
-        <strong>Role:</strong> Developer <br>
-        <a href="https://drive.google.com/file/d/133Ch5-JYF_lj8hmFJkCWty5a-SIQjDbg/view" class="view-testimonial" target="_blank">View Testimonial</a>
-
-      </li>
-      <li>
-        <strong>Enrollment & Edops</strong> - School data management applications using Mithril JS, Webpack, Gundb (Frontend) and Python, PostgreSQL (Backend). <br>
-        <strong>Role:</strong> Developer
-      </li>
-    </ul>
-  </div>
-  <div class="image filtered tinted" data-position="top left">
-    <img src="images/gallery/thumbs/04.jpg" alt="Full-Stack Development Projects" />
-  </div>
-</section>
-
-<!-- Cloud Infrastructure & DevOps Projects -->
-<section class="panel spotlight medium" id="first">
-  <div class="content span-7">
-    <h2 class="major">Cloud Infrastructure & DevOps Projects</h2>
-    <ul>
-      <li>
-        <strong>Beacon</strong> - AWS setup for EC2, VPC, Route 53, S3, and CloudFront using Python (Boto3, Cloudbridge) and Node.js (AWS SDK). <br>
-        <strong>Role:</strong> Developer
-      </li>
-      <li>
-        <strong>Wireguard & VM Setup</strong> - Automated Wireguard VPN setup and VM deployment using Ansible and Python. <br>
-        <strong>Role:</strong> Developer
-      </li>
-      <li>
-        <strong>VM Dashboard</strong> - A monitoring dashboard utilizing Grafana, Prometheus, Node Exporter, Loki, and Promtail. <br>
-        <strong>Role:</strong> Developer
-      </li>
-      <li>
-        <strong>Email Server & SFTP Setup</strong> - Configured email servers and SFTP for secure data handling using Docker, Ansible, and AWS. <br>
-        <strong>Role:</strong> Developer
-      </li>
-    </ul>
-  </div>
-  <div class="image filtered tinted" data-position="top left">
-    <img src="images/gallery/thumbs/07.jpg" alt="Cloud Infrastructure & DevOps Projects" />
-  </div>
-</section>
-
-<!-- Field of Interest Section -->
-      <section class="panel spotlight medium" id="interest">
-        <div class="content span-7">
-          <h2 class="major">Field of Interest</h2>
-          <ul>
-            <li>UI/UX Design and Development</li>
-            <li>Full-Stack Application Development</li>
-          </ul>
-        </div>
-        <div class="image filtered tinted" data-position="top left">
-    <img src="images/gallery/thumbs/05.jpg" alt="interest" />
-  </div>
-      </section>
-
-      <!-- Strengths & Hobbies Section -->
-      <section class="panel spotlight medium" id="strengths">
-        <div class="content span-7">
-          <h2 class="major">Strengths & Hobbies</h2>
-          <ul>
-            <li>Strong problem-solving skills and a collaborative mindset.</li>
-            <li>I have a strong ability to learn new technologies and adapt quickly to evolving challenges, ensuring continuous growth and innovation in my work.</li>
-            <li>Exploring new destinations through travel, acquiring proficiency in new programming languages, undertaking innovative tech projects, and cultivating a passion for planting and gardening.</li>
-          </ul>
-        </div>
-        <div class="image filtered tinted" data-position="top left">
-    <img src="images/gallery/thumbs/06.jpg" alt="strengths" />
-  </div>
-      </section>
-
-
-
-
-							
-
-
-						<!-- Panel -->
-							<section class="panel color4-alt" id="contact">
-  <div class="intro color4">
-    <h2 class="major">Contact</h2>
-    <p>Feel free to reach out to me for collaboration, job opportunities, or any inquiries related to my expertise and projects.</p>
-  </div>
-  <div class="inner columns divided">
-    <div class="span-3-25">
-      <form method="post" action="#">
-        <div class="fields">
-          <div class="field half">
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" />
-          </div>
-          <div class="field half">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" />
-          </div>
-          <div class="field">
-            <label for="message">Message</label>
-            <textarea name="message" id="message" rows="4"></textarea>
-          </div>
-        </div>
-        <ul class="actions">
-          <li><input type="submit" value="Send Message" class="button primary" /></li>
-        </ul>
-      </form>
-    </div>
-    <div class="span-1-5">
-      <ul class="contact-icons color1">
-        <li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/kyawsoe/">LinkedIn</a></li>
-        <li class="icon brands fa-github"><a href="https://github.com/kyawsoe007">GitHub</a></li>
-        <li class="icon fas fa-envelope"><a href="mailto:kyawsoeye11@gmail.com">Email</a></li>
-        <li class="icon solid fa-map-marker-alt">Samut Prakan, Thailand</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-					</div>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+</body>
 </html>
